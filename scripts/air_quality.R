@@ -1,5 +1,6 @@
 library(ggplot2)
 library(lubridate)
+library(tidyverse)
 
 data(airquality)
 
@@ -15,11 +16,15 @@ df[is.na(df)] <- 0
 
 df['Norm_Solar_Rad'] <- as.data.frame(scale(df$Solar.R))
 
-summary(df)
+summarywithdate <- df |> 
+  dplyr::mutate(Date = paste(Month, Day, "2020", sep = '-')) |> 
+  dplyr::mutate(Date = lubridate::mdy(Date))
 
-ggplot(df, aes(x = Solar.R, y = Temp)) +
+
+summary(summarywithdate)
+
+ggplot(summarywithdate, aes(x = Date, y = Temp)) +
   geom_point(color = "blue", size = 2) +
   theme_minimal() +
-  ggtitle("Temperature vs. Solar radiation)")
+  ggtitle("Temperature vs. Date")
 
-df
