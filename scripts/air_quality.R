@@ -28,3 +28,9 @@ ggplot(summarywithdate, aes(x = Date, y = Temp)) +
   theme_minimal() +
   ggtitle("Temperature vs. Date")
 
+
+ggplot(summarywithdate, aes(x = Date, y = Solar.R)) +
+  geom_point(color = "red", size = 2) +
+  theme_minimal() +
+  ggtitle("Temperature vs. Solar radiation")
+
